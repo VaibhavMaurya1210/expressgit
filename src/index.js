@@ -1,14 +1,27 @@
 import mongoose  from "mongoose";
-
+import express from "express"
 import dotenv from "dotenv"
 import connectDb from "./db/index.js";
+
+const app = express();
 
 dotenv.config({
     path:   './env'
 })
 
-connectDb();
-
+connectDb()
+.then( () =>{
+    app.listen(process.env.PORT || 8000, () =>{
+        console.log(`server is running...... ${process.env.PORT}`)
+    })
+    app.on("error",(error) =>{
+        console.log("ERROR",error)
+        throw error
+    })
+})
+.catch((error) =>{
+    console.log('mongodb Server is runnin failed',error)
+})
 
 
 

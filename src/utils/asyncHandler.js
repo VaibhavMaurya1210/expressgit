@@ -11,9 +11,9 @@
 // export {asyncHandler}
 
 
-const asyncHandler = (ee) => async(res,req,next) => {
+const asyncHandler = (fa) => async(res,req,next) => {
     try {
-        await ee(res,req,next)
+        await fa(res,req,next)
     } catch (error) {
         res.status(err.code || 300).json({
             success:false,
